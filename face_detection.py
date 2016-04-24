@@ -20,14 +20,15 @@ print data.shape
 
 covariance_matrix = np.cov(data)
 eig_values, eig_vectors = np.linalg.eig(covariance_matrix)
+zeros = np.zeros((1904,1))
+eig_values = np.vstack((eig_values.reshape(400,1),zeros))
+eig_vectors = np.dot(np.transpose(data),eig_vectors)
 
 z = zip(eig_values,eig_vectors)
 z.sort(key = lambda x:x[0])
 eig_values,eig_vectors = zip(*z)
 eig_vectors = np.array(eig_vectors)
 eig_values = np.array(eig_values)
-
-
 
 
 plt.plot(eig_values)
